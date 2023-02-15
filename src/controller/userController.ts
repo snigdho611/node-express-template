@@ -44,12 +44,11 @@ class userController {
     try {
       console.log("Request for getting all users received");
       console.log(mongoose.connection.readyState);
-      if (mongoose.connection.readyState) {
-        const result = await User.find({});
-        return res.send(success({ message: "Successfully got data", data: result }));
-      } else {
+      if (mongoose.connection.readyState === 0) {
         return res.send(success({ message: "Successfully got data", data: usersJson }));
       }
+      const result = await User.find({});
+      return res.send(success({ message: "Successfully got data", data: result }));
     } catch (error) {
       // console.log(error);
       console.log(error);
