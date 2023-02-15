@@ -1,5 +1,4 @@
 import { body, param } from "express-validator";
-import { Login } from "../model/login";
 
 const validator = {
   addProduct: [
@@ -77,10 +76,6 @@ const validator = {
       .isEmail()
       .withMessage("Email format is incorrect")
       .custom(async (value) => {
-        const user = await Login.findOne({ email: value }).exec();
-        if (user) {
-          return Promise.reject("Email already exists");
-        }
         return true;
       }),
     body("phone").notEmpty().withMessage("Phone is required"),
@@ -157,14 +152,15 @@ const validator = {
     body("customerId").notEmpty().withMessage("Customer ID is required"),
     body("cart")
       // .notEmpty().withMessage("Cart is empty!")
-      .isArray({ min: 1 }).withMessage("Cart is empty!")
+      .isArray({ min: 1 })
+      .withMessage("Cart is empty!"),
   ],
   updatePassword: [
     body("userId").notEmpty().withMessage("User Id must be provided"),
     body("currentPassword").notEmpty().withMessage("The current password must be provided"),
     body("newPassword").notEmpty().withMessage("The new password must be provided"),
     body("confirmPassword").notEmpty().withMessage("The new password must be provided again"),
-  ]
+  ],
 };
 
 export default validator;

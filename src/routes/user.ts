@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import UserController from "../controller/adminController";
+import UserController from "../controller/userController";
 import validator from "../middleware/validation";
 import { checkAuth, isAdmin } from "../middleware/authenticate";
 import { fileUploader } from "../middleware/files";
@@ -14,6 +14,6 @@ router.post(
   UserController.addProduct
 );
 
-router.post("/get-users", checkAuth, isAdmin, validator.addProduct, UserController.getAll);
+router.get("/get-users", UserController.getAll);
 
 export default router;

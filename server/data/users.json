@@ -1,0 +1,16 @@
+[
+  {
+    "firstName": "Bruce",
+    "lastName": "Wayne",
+    "phone": "+8801928374654",
+    "address": "Gotham, USA",
+    "type": "superhero"
+  },
+  {
+    "firstName": "Clark",
+    "lastName": "Kent",
+    "phone": "+8802938473821",
+    "address": "Metropolis, USA",
+    "type": "superhero"
+  }
+]
