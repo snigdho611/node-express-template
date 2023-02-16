@@ -4,16 +4,29 @@ import { success, failure } from "../utils/commonResponse";
 import { HTTP_STATUS } from "../utils/httpStatus";
 import { Result, ValidationError, validationResult } from "express-validator";
 import { promises as fsPromises } from "fs";
+import fs from "fs";
 import path from "path";
 import { User } from "../model/user";
 import mongoose from "mongoose";
-import usersJson from "../../server/data/users.json";
+// import usersJson from "../../server/data/users.json";
 
 class userController {
   async getAll(req: Request, res: Response) {
     try {
       console.log("Request for getting all users received");
-      return res.send(success({ message: "Successfully got data", data: usersJson }));
+      let users: any;
+      await fsPromises
+        .readFile(path.resolve("./server/data/users.json"), "utf-8")
+        .then((data) => {
+          users = JSON.parse(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          return res
+            .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
+            .send(failure({ message: "An unexpected error occured" }));
+        });
+      return res.send(success({ message: "Successfully got data", data: users }));
     } catch (error) {
       console.log(error);
       return res
@@ -33,10 +46,13 @@ class userController {
             failure({ message: "An unexpected error occured", error: validatorResult.array() })
           );
       }
-      // const users = fsPromises.readFile(usersJson);
-      const result = usersJson.filter((user) => user.id === parseInt(req.params.id))[0];
-      if (result) {
-        return res.send(success({ message: "Successfully got data", data: result }));
+      let users: any;
+      await fsPromises.readFile("../../server/data/users.json").then((result) => {
+        // users = result.filter((user) => user.id === parseInt(req.params.id))[0];
+        console.log(result);
+      });
+      if (users) {
+        return res.send(success({ message: "Successfully got data", data: users }));
       }
     } catch (error) {
       return res
