@@ -4,9 +4,7 @@ import path from "path";
 
 type DestinationCallback = (error: Error | null, destination: string) => void;
 type FileNameCallback = (error: Error | null, filename: string) => void;
-interface MulRequest extends Request {
-
-}
+interface MulRequest extends Request {}
 
 const fileStorage = multer.diskStorage({
   destination: (req: Request, file: Express.Multer.File, callback: any) => {
@@ -17,7 +15,7 @@ const fileStorage = multer.diskStorage({
       ) {
         console.log("Uploading file...");
         // callback(null, path.join(__dirname, '../files/products'));
-        callback(null, 'files/products/');
+        callback(null, "server/files/");
       }
     } else {
       callback("No file is found", null);
@@ -28,8 +26,8 @@ const fileStorage = multer.diskStorage({
       callback(
         null,
         file.originalname.split(".")[0].replace(/\ /g, "") +
-        Date.now() +
-        path.extname(file.originalname)
+          Date.now() +
+          path.extname(file.originalname)
       );
       return;
     } else {
@@ -40,15 +38,7 @@ const fileStorage = multer.diskStorage({
 
 const checkImage = (req: Request, file: Express.Multer.File, callback: any) => {
   if (file) {
-    if (
-      file.mimetype === "image/jpeg" ||
-      file.mimetype === "image/jpg" ||
-      file.mimetype === "image/png"
-    ) {
-      callback(null, true);
-    } else {
-      callback(null, false);
-    }
+    callback(null, true);
   } else {
     callback("No file found", false);
   }

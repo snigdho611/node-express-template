@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "firstName": "Bruce",
     "lastName": "Wayne",
     "phone": "+8801928374654",
@@ -7,10 +8,19 @@
     "type": "superhero"
   },
   {
+    "id": 2,
     "firstName": "Clark",
     "lastName": "Kent",
     "phone": "+8802938473821",
     "address": "Metropolis, USA",
+    "type": "superhero"
+  },
+  {
+    "id": 3,
+    "firstName": "Stephen",
+    "lastName": "Strange",
+    "phone": "+8802938233821",
+    "address": "New York, USA",
     "type": "superhero"
   }
 ]

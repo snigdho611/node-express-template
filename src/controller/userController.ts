@@ -10,7 +10,56 @@ import mongoose from "mongoose";
 import usersJson from "../../server/data/users.json";
 
 class userController {
-  async addProduct(req: MulterRequest, res: Response, next: NextFunction) {
+  async getAll(req: Request, res: Response) {
+    try {
+      console.log("Request for getting all users received");
+      return res.send(success({ message: "Successfully got data", data: usersJson }));
+    } catch (error) {
+      console.log(error);
+      return res
+        .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
+        .send(failure({ message: "An unexpected error occured" }));
+    }
+  }
+
+  async getUserById(req: Request, res: Response) {
+    //
+    try {
+      const validatorResult: Result<ValidationError> = validationResult(req);
+      if (!validatorResult.isEmpty()) {
+        return res
+          .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
+          .send(
+            failure({ message: "An unexpected error occured", error: validatorResult.array() })
+          );
+      }
+      // const users = fsPromises.readFile(usersJson);
+      const result = usersJson.filter((user) => user.id === parseInt(req.params.id))[0];
+      if (result) {
+        return res.send(success({ message: "Successfully got data", data: result }));
+      }
+    } catch (error) {
+      return res
+        .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
+        .send(failure({ message: "An unexpected error occured" }));
+    }
+    // if(validatorResult.isEmpty())
+    // console.log(validatorResult);
+  }
+
+  async createUser(req: Request, res: Response) {
+    //
+  }
+
+  async updateUserById(req: Request, res: Response) {
+    //
+  }
+
+  async deleteUserById(req: Request, res: Response) {
+    //
+  }
+
+  async uploadImage(req: MulterRequest, res: Response) {
     try {
       const validatorResult: Result<ValidationError> = validationResult(req);
       if (!req.file) {
@@ -20,7 +69,6 @@ class userController {
           })
         );
       }
-      // console.log(validatorResult);
       if (!validatorResult.isEmpty()) {
         if (req.file) {
           await fsPromises.unlink(path.join(__dirname, "../files/products", req.file.filename));
@@ -34,24 +82,6 @@ class userController {
     } catch (error) {
       console.log(error);
       // next(error);
-      return res
-        .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
-        .send(failure({ message: "An unexpected error occured" }));
-    }
-  }
-
-  async getAll(req: Request, res: Response, next: NextFunction) {
-    try {
-      console.log("Request for getting all users received");
-      console.log(mongoose.connection.readyState);
-      if (mongoose.connection.readyState === 0) {
-        return res.send(success({ message: "Successfully got data", data: usersJson }));
-      }
-      const result = await User.find({});
-      return res.send(success({ message: "Successfully got data", data: result }));
-    } catch (error) {
-      // console.log(error);
-      console.log(error);
       return res
         .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
         .send(failure({ message: "An unexpected error occured" }));
