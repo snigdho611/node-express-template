@@ -7,10 +7,9 @@ import { fileUploader } from "../middleware/files";
 
 router.get("/get-users", UserController.getAll);
 router.get("/get-users/:id", validator.getUserById, UserController.getUserById);
-router.post("/create-user", validator.createUser, UserController.createUser)
+router.post("/create-user", isAdmin, validator.createUser, UserController.createUser)
 router.post(
   "/file",
-  isAdmin,
   fileUploader.single("file"),
   UserController.uploadImage
 );

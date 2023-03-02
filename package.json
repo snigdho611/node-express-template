@@ -6,6 +6,7 @@
   "scripts": {
     "start": "ts-node ./src/app.ts",
     "dev": "nodemon app.ts",
+    "build": "tsc --project tsconfig.json && cp -r ./server ./dist/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Snigdho Dip Howlader",

@@ -6,12 +6,12 @@ const fileStorage = multer.diskStorage({
   destination: (req: Request, file: Express.Multer.File, callback: any) => {
     if (file) {
       if (
-        req.originalUrl === "/admin/products/update-image" ||
-        req.originalUrl === "/admin/products/add"
+        req.originalUrl === "/users/file"
       ) {
         console.log("Uploading file...");
-        // callback(null, path.join(__dirname, '../files/products'));
         callback(null, "server/files/");
+      } else {
+        callback("URL mismatch", null)
       }
     } else {
       callback("No file is found", null);
@@ -21,9 +21,9 @@ const fileStorage = multer.diskStorage({
     if (file) {
       callback(
         null,
-        file.originalname.split(".")[0].replace(/\ /g, "") +
-          Date.now() +
-          path.extname(file.originalname)
+        file.originalname.split(".")[0].replace(/\ /g, "") + "_" +
+        Date.now() +
+        path.extname(file.originalname)
       );
       return;
     } else {
@@ -32,9 +32,17 @@ const fileStorage = multer.diskStorage({
   },
 });
 
-const checkImage = (req: Request, file: Express.Multer.File, callback: any) => {
+const checkFile = (req: Request, file: Express.Multer.File, callback: any) => {
   if (file) {
-    callback(null, true);
+    switch (file.mimetype) {
+      case ("text/plain"): {
+        callback(null, true);
+        break;
+      }
+      default: {
+        callback("File extension can only be in .txt", false);
+      }
+    }
   } else {
     callback("No file found", false);
   }
@@ -42,6 +50,6 @@ const checkImage = (req: Request, file: Express.Multer.File, callback: any) => {
 
 export const fileUploader = multer({
   storage: fileStorage,
-  limits: { fieldSize: 30000 },
-  fileFilter: checkImage,
+  limits: { fieldSize: 1 },
+  fileFilter: checkFile,
 });
