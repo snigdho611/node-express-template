@@ -1,5 +1,3 @@
-import { Request } from "express";
-
 export interface SuccessResponse {
   success: true;
   message: string;
@@ -20,16 +18,6 @@ export interface FailureResponse {
 export interface FailureProps {
   message: string;
   error?: any[];
-}
-
-export interface AuthRequest extends Request {
-  user?: {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    isAdmin: boolean;
-  };
 }
 
 export interface IUser {

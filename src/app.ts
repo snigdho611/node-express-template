@@ -9,17 +9,16 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.set("view engine", "ejs");
 
 app.use("/users", userRouter);
-// app.use("/admin", adminRouter);
-// app.use("/cart", cartRouter);
-// app.use("/files", imagesRouter);
-// app.use("/auth", authenticateRouter);
-// app.use("/sales", salesRouter);
+
+// The databaseConnection function is set up optonally
+// If a valid mongodb database connection string exists in the environment
+// It will try to fetch data from database
+// Otherwise it will serve JSON data
 
 databaseConnection((): any => {
-  app.listen(8000, () => {
+  app.listen(process.env.PORT, () => {
     console.log("Application is running on 8000");
   });
 });

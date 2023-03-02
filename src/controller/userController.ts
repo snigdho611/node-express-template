@@ -1,14 +1,10 @@
-import { NextFunction, Request, Response } from "express";
-import { IProduct, MulterRequest } from "../interfaces/database";
+import { Request, Response } from "express";
+import { MulterRequest } from "../interfaces/database";
 import { success, failure } from "../utils/commonResponse";
 import { HTTP_STATUS } from "../utils/httpStatus";
 import { Result, ValidationError, validationResult } from "express-validator";
 import { promises as fsPromises } from "fs";
-import fs from "fs";
 import path from "path";
-import { User } from "../model/user";
-import mongoose from "mongoose";
-// import usersJson from "../../server/data/users.json";
 
 class userController {
   async getAll(req: Request, res: Response) {
@@ -36,8 +32,8 @@ class userController {
   }
 
   async getUserById(req: Request, res: Response) {
-    //
     try {
+      console.log("Request for getting one user received");
       const validatorResult: Result<ValidationError> = validationResult(req);
       if (!validatorResult.isEmpty()) {
         return res
@@ -46,21 +42,24 @@ class userController {
             failure({ message: "An unexpected error occured", error: validatorResult.array() })
           );
       }
-      let users: any;
-      await fsPromises.readFile("../../server/data/users.json").then((result) => {
-        // users = result.filter((user) => user.id === parseInt(req.params.id))[0];
-        console.log(result);
+      let foundUser: any;
+      await fsPromises.readFile("./server/data/users.json", "utf-8").then((result) => {
+        const users = JSON.parse(result);
+        users.map((element:any)=>{
+          if(element.id === parseInt(req.params.id)){
+            foundUser = element
+          }
+        })
       });
-      if (users) {
-        return res.send(success({ message: "Successfully got data", data: users }));
+      if (foundUser) {
+        return res.send(success({ message: "Successfully got user", data: foundUser }));
       }
     } catch (error) {
+      console.log(error)
       return res
         .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
         .send(failure({ message: "An unexpected error occured" }));
     }
-    // if(validatorResult.isEmpty())
-    // console.log(validatorResult);
   }
 
   async createUser(req: Request, res: Response) {
