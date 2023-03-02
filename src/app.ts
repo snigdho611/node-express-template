@@ -12,13 +12,14 @@ app.use(express.json());
 
 app.use("/users", userRouter);
 
-// The databaseConnection function is set up optonally
-// If a valid mongodb database connection string exists in the environment
-// It will try to fetch data from database
-// Otherwise it will serve JSON data
+ {/*
+    The databaseConnection function is set up optonally
+    If a valid mongodb database connection string exists in the environment,
+    Uncomment the databaseConnection function below
+  */}
 
-databaseConnection((): any => {
+// databaseConnection((): any => {
   app.listen(process.env.PORT, () => {
     console.log("Application is running on 8000");
   });
-});
+// });

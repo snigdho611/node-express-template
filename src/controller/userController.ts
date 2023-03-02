@@ -45,8 +45,8 @@ class userController {
       let foundUser: any;
       await fsPromises.readFile("./server/data/users.json", "utf-8").then((result) => {
         const users = JSON.parse(result);
-        users.map((element:any)=>{
-          if(element.id === parseInt(req.params.id)){
+        users.map((element: any) => {
+          if (element.id === parseInt(req.params.id)) {
             foundUser = element
           }
         })
@@ -54,6 +54,9 @@ class userController {
       if (foundUser) {
         return res.send(success({ message: "Successfully got user", data: foundUser }));
       }
+      return res
+        .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
+        .send(failure({ message: "An unexpected error occured" }));
     } catch (error) {
       console.log(error)
       return res
@@ -63,7 +66,17 @@ class userController {
   }
 
   async createUser(req: Request, res: Response) {
-    //
+    try {
+      const validatorResult = validationResult(req);
+      if (!validatorResult.isEmpty()) {
+        return res
+          .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
+          .send(failure({ message: "The request failed validations", error: validatorResult.array() }));
+      }
+      console.log(validatorResult)
+    } catch (error) {
+
+    }
   }
 
   async updateUserById(req: Request, res: Response) {
@@ -89,7 +102,6 @@ class userController {
           await fsPromises.unlink(path.join(__dirname, "../files/products", req.file.filename));
           console.log({ error: "File was deleted due to other validation errors" });
         }
-        // console.log(req.file);
         return res
           .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
           .send(failure({ message: "Invalid inputs", error: validatorResult.array() }));
