@@ -23,11 +23,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: "regular",
   },
-  balance: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
 });
 
 export const User = mongoose.model("User", userSchema);

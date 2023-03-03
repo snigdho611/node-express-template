@@ -118,7 +118,6 @@ class userController {
       return res.status(HTTP_STATUS.ACCEPTED).send(success({ message: "File uploaded successfully", data: req.file}));
     } catch (error) {
       console.log(error);
-      // next(error);
       return res
         .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
         .send(failure({ message: "An unexpected error occured" }));

@@ -30,8 +30,6 @@ const validator = {
       .isString()
       .withMessage("type must be in string format"),
   ],
-  updateUser: [],
-  deleteUser: [],
 };
 
 export default validator;
