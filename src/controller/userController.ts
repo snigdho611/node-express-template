@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { MulterRequest } from "../interfaces/database";
 import { success, failure } from "../utils/commonResponse";
 import { HTTP_STATUS } from "../utils/httpStatus";
 import { Result, ValidationError, validationResult } from "express-validator";
 import { promises as fsPromises } from "fs";
 import path from "path";
+import { MulterRequest } from "src/interfaces/commmon";
 
 class userController {
   async getAll(req: Request, res: Response) {

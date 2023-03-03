@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface SuccessResponse {
   success: true;
   message: string;
@@ -27,4 +29,8 @@ export interface IUser {
   address: string;
   type: string;
   balance: number;
+}
+
+export interface MulterRequest extends Request {
+  file?: any;
 }

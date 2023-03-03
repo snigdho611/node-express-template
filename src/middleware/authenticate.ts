@@ -3,7 +3,6 @@ import { failure } from "../utils/commonResponse";
 import { HTTP_STATUS } from "../utils/httpStatus";
 
 export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req)
   if (req.body.token) {
     next();
   } else {
