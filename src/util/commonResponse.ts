@@ -24,21 +24,16 @@ class _Response_ {
         return res.status(status).send(response);
     }
 
-    validate(req: Request, res: Response, messageOnError: string) {
+    validate(req: Request) {
         const validation = validationResult(req).array();
-        if (validation.length > 0) {
-            this.send(
-                res,
-                HTTP_STATUS.UNPROCESSABLE_ENTITY,
-                messageOnError ? messageOnError : "Validation failed",
-                validation.map((element) => ({
-                    param: element.type,
-                    message: element.msg,
-                }))
-            );
-            return true;
-        }
-        return false;
+        // if (validation.length > 0) {
+        return validation;
+        // .map((element) => ({
+        //     param: element.type,
+        //     message: element.msg,
+        // }));
+        // }
+        // return null;
     }
 }
 

@@ -5,7 +5,7 @@ import PostController from "../controller/PostController";
 import { isAdmin } from "../middleware/authenticate";
 import { fileUploader } from "../middleware/files";
 
-// router.get("/all", PostController.getAll);
+router.get("/all", PostController.getAll);
 // router.get("/detail/:id", validator.getPostById, PostController.getUserById);
 router.post(
     "/create",

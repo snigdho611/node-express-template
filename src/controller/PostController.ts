@@ -8,29 +8,17 @@ import { Result, ValidationError, validationResult } from "express-validator";
 import prisma from "@config/database";
 
 class postController {
-    // async getAll(req: Request, res: Response) {
-    //     try {
-    //         console.log("Request for getting all users received");
-    //         let users: any;
-    //         await fsPromises
-    //             .readFile(path.resolve("./server/data/users.json"), "utf-8")
-    //             .then((data) => {
-    //                 users = JSON.parse(data);
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err);
-    //                 return res
-    //                     .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
-    //                     .send(failure({ message: "An unexpected error occured" }));
-    //             });
-    //         return res.send(success({ message: "Successfully got data", data: users }));
-    //     } catch (error) {
-    //         console.log(error);
-    //         return res
-    //             .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
-    //             .send(failure({ message: "An unexpected error occured" }));
-    //     }
-    // }
+    async getAll(req: Request, res: Response) {
+        try {
+            console.log("Request for getting all users received");
+            const result = await prisma.post.findMany();
+
+            return CustomResponse.send(res, HTTP_STATUS.OK, "Successfully got data", result);
+        } catch (error) {
+            console.log(error);
+            return CustomResponse.send(res, HTTP_STATUS.UNPROCESSABLE_ENTITY, "An unexpected error occured");
+        }
+    }
 
     // async getUserById(req: Request, res: Response) {
     //     try {
@@ -67,19 +55,13 @@ class postController {
     async createUser(req: Request, res: Response) {
         try {
             console.log("Request for creating one user received");
-            const validatorResult: Result<ValidationError> = validationResult(req);
-            if (!validatorResult.isEmpty()) {
-                // return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(
-                //     failure({
-                //         message: "The request could not be validated",
-                //         error: validatorResult.array(),
-                //     })
-                // );
+            const validation = CustomResponse.validate(req);
+            if (validation.length > 0) {
                 return CustomResponse.send(
                     res,
                     HTTP_STATUS.UNPROCESSABLE_ENTITY,
                     "The request could not be validated",
-                    validatorResult.array()
+                    validation
                 );
             }
 
@@ -94,9 +76,6 @@ class postController {
             });
 
             return CustomResponse.send(res, HTTP_STATUS.OK, "Successfully created post!", result);
-            // return res
-            // .status(HTTP_STATUS.OK)
-            // .send(success({ message: "Successfully created post", data: result }));
         } catch (error) {
             console.log(error);
             return CustomResponse.send(res, HTTP_STATUS.UNPROCESSABLE_ENTITY, "An unexpected error occured");
