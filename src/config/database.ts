@@ -1,23 +1,5 @@
-import { Application } from "express";
-import mongoose from "mongoose";
+import { PrismaClient } from "@prisma/client";
 
-const databaseConnection = async (callback: Application["listen"]) => {
-  try {
-    console.log("Connecting to database...");
-    if (process.env.DATABASE_URL) {
-      const client = await mongoose.connect(process.env.DATABASE_URL);
-      if (client) {
-        console.log("Database connection completed, running with database connection");
-      }
-      callback();
-    } else {
-      console.log("Database connection string unavailable, running without database connection");
-      callback();
-    }
-  } catch (error: any) {
-    console.log(error);
-    throw new Error(error.message);
-  }
-};
+const prisma = new PrismaClient();
 
-export default databaseConnection;
+export default prisma;
