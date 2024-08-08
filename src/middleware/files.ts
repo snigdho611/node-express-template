@@ -1,52 +1,26 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-undef */
-import { Request } from "express";
-import multer from "multer";
-import path from "path";
+import multer, { diskStorage } from "multer";
+const allowedImageTypes = ["image/jpeg", "image/png", "image/webp"];
 
-const fileStorage = multer.diskStorage({
-    destination: (req: Request, file: Express.Multer.File, callback: any) => {
-        if (file) {
-            if (req.originalUrl === "/posts/file") {
-                callback(null, "server/files/");
-            } else {
-                callback("URL mismatch", null);
-            }
-        } else {
-            callback("No file is found", null);
+const fileUploader = multer({
+    storage: diskStorage({
+        destination: "storage/",
+        filename: (req, file, callback) => {
+            callback(null, Date.now() + "-" + file.originalname);
+        },
+    }),
+    fileFilter(req, file, callback) {
+        const mimetype = file.mimetype;
+
+        if (!allowedImageTypes.includes(mimetype)) {
+            callback(new Error("File format is incorrect"));
         }
+        callback(null, true);
     },
-    filename: (req: Request, file: Express.Multer.File, callback: any) => {
-        if (file) {
-            callback(
-                null,
-                file.originalname.split(".")[0].replace(/ /g, "") + "_" + Date.now() + path.extname(file.originalname)
-            );
-            return;
-        } else {
-            callback("No file is found", null);
-        }
+    limits: {
+        fileSize: 10000000,
     },
 });
 
-const checkFile = (req: Request, file: Express.Multer.File, callback: any) => {
-    if (file) {
-        switch (file.mimetype) {
-            case "text/plain": {
-                callback(null, true);
-                break;
-            }
-            default: {
-                callback("File extension can only be in .txt", false);
-            }
-        }
-    } else {
-        callback("No file found", false);
-    }
-};
+export const uploadImage = fileUploader.single("my-file");
 
-export const fileUploader = multer({
-    storage: fileStorage,
-    limits: { fieldSize: 1 },
-    fileFilter: checkFile,
-});
+export default fileUploader;

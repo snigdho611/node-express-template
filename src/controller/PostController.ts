@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import CustomResponse from "../util/commonResponse";
 import { HTTP_STATUS } from "@util/httpStatus";
 import PostService from "@service/PostService";
-
+import path from "path";
+import fs from "fs";
+import { uploadImage } from "@middleware/files";
 class postController {
     async getAll(req: Request, res: Response) {
         try {
@@ -75,26 +77,36 @@ class postController {
         }
     }
 
-    // async uploadImage(req: MulterRequest, res: Response) {
-    //     try {
-    //         console.log("Request for uploading file was received");
-    //         if (!req.file) {
-    //             return res.status(HTTP_STATUS.UNPROCESSABLE_ENTITY).send(
-    //                 failure({
-    //                     message: "Product Image is required.Only jpeg, jpg and png file is allowed!",
-    //                 })
-    //             );
-    //         }
-    //         return res
-    //             .status(HTTP_STATUS.ACCEPTED)
-    //             .send(success({ message: "File uploaded successfully", data: req.file }));
-    //     } catch (error) {
-    //         console.log(error);
-    //         return res
-    //             .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
-    //             .send(failure({ message: "An unexpected error occured" }));
-    //     }
-    // }
+    async uploadFile(req: Request, res: Response) {
+        try {
+            uploadImage(req, res, async (error) => {
+                if (error && error.message) {
+                    return CustomResponse.send(res, HTTP_STATUS.UNPROCESSABLE_ENTITY, error.message);
+                }
+
+                if (!req || !req.file) {
+                    return CustomResponse.send(res, HTTP_STATUS.UNPROCESSABLE_ENTITY, "File is not found");
+                }
+                if (!fs.existsSync(path.join(__dirname, "../../storage/profile-picture/"))) {
+                    fs.mkdirSync(path.join(__dirname, "../../storage/profile-picture/"));
+                }
+
+                fs.rename(
+                    path.join(__dirname, "../../storage/", req.file.filename),
+                    path.join(__dirname, "../../storage/profile-picture/", req.file.filename),
+                    (fileError) => {
+                        if (fileError) {
+                            return CustomResponse.send(res, HTTP_STATUS.UNPROCESSABLE_ENTITY, fileError.message);
+                        }
+                        return CustomResponse.send(res, HTTP_STATUS.OK, "Successfully uploaded file");
+                    }
+                );
+                // return CustomResponse.send(res, HTTP_STATUS.OK, "Successfully uploaded file");
+            });
+        } catch (error) {
+            return CustomResponse.send(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, "An unexpected error occured");
+        }
+    }
 }
 const PostController = new postController();
 export default PostController;

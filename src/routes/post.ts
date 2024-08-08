@@ -7,6 +7,6 @@ import { isAdmin } from "@middleware/authenticate";
 router.get("/all", PostController.getAll);
 router.get("/detail/:id", validator.getPostById, PostController.getById);
 router.post("/create", isAdmin, validator.createPost, PostController.createUser);
-// router.post("/file", fileUploader.single("file"), PostController.uploadImage);
+router.post("/file", PostController.uploadFile);
 
 export default router;

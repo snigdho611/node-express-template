@@ -10,6 +10,9 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "npx eslint ."
     },
+    "prisma": {
+        "seed": "ts-node ./prisma/seed.ts"
+    },
     "author": "Snigdho Dip Howlader",
     "license": "ISC",
     "dependencies": {

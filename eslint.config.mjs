@@ -18,7 +18,7 @@ export default [
                     caughtErrorsIgnorePattern: "^_",
                 },
             ],
-            "no-undef": "warn",
+            "no-undef": "error",
             "no-console": "off",
             "@typescript-eslint/no-explicit-any": "error",
             "no-const-assign": "error",
