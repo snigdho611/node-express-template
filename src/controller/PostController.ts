@@ -1,60 +1,55 @@
 import { Request, Response } from "express";
 import CustomResponse from "../util/commonResponse";
 import { HTTP_STATUS } from "@util/httpStatus";
-import { Result, ValidationError, validationResult } from "express-validator";
-// import { promises as fsPromises } from "fs";
-// import path from "path";
-// import { MulterRequest } from "src/interfaces/commmon";
-import prisma from "@config/database";
+import PostService from "@service/PostService";
 
 class postController {
     async getAll(req: Request, res: Response) {
         try {
-            console.log("Request for getting all users received");
-            const result = await prisma.post.findMany();
+            console.log("Request for getting all posts received");
+            const { page, limit } = req.query;
 
-            return CustomResponse.send(res, HTTP_STATUS.OK, "Successfully got data", result);
+            if (Number(page) < 0 || Number(limit) < 0) {
+                return CustomResponse.send(res, HTTP_STATUS.BAD_REQUEST, "Invalid parameters provided");
+            }
+
+            const result = await PostService.getAll(Number(page), Number(limit));
+
+            return CustomResponse.send(res, HTTP_STATUS.OK, "Successfully got all posts", result);
         } catch (error) {
             console.log(error);
-            return CustomResponse.send(res, HTTP_STATUS.UNPROCESSABLE_ENTITY, "An unexpected error occured");
+            return CustomResponse.send(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, "An unexpected error occured");
         }
     }
 
-    // async getUserById(req: Request, res: Response) {
-    //     try {
-    //         console.log("Request for getting one user received");
-    //         const validatorResult: Result<ValidationError> = validationResult(req);
-    //         if (!validatorResult.isEmpty()) {
-    //             return res
-    //                 .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
-    //                 .send(failure({ message: "An unexpected error occured", error: validatorResult.array() }));
-    //         }
-    //         let foundUser: any;
-    //         await fsPromises.readFile("./server/data/users.json", "utf-8").then((result) => {
-    //             const users = JSON.parse(result);
-    //             users.map((element: any) => {
-    //                 if (element.id === parseInt(req.params.id)) {
-    //                     foundUser = element;
-    //                 }
-    //             });
-    //         });
-    //         if (foundUser) {
-    //             return res.send(success({ message: "Successfully got user", data: foundUser }));
-    //         }
-    //         return res
-    //             .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
-    //             .send(failure({ message: "An unexpected error occured" }));
-    //     } catch (error) {
-    //         console.log(error);
-    //         return res
-    //             .status(HTTP_STATUS.UNPROCESSABLE_ENTITY)
-    //             .send(failure({ message: "An unexpected error occured" }));
-    //     }
-    // }
+    async getById(req: Request, res: Response) {
+        try {
+            console.log("Request for getting one post received");
+            const validation = CustomResponse.validate(req);
+            if (validation.length > 0) {
+                return CustomResponse.send(
+                    res,
+                    HTTP_STATUS.UNPROCESSABLE_ENTITY,
+                    "An unexpected error occured",
+                    validation
+                );
+            }
+            const { id } = req.params;
+            const post = await PostService.getById(Number(id));
+
+            if (!post) {
+                return CustomResponse.send(res, HTTP_STATUS.NOT_FOUND, "Unable to find post");
+            }
+            return CustomResponse.send(res, HTTP_STATUS.ACCEPTED, "Successfully found post", post);
+        } catch (error) {
+            console.log(error);
+            return CustomResponse.send(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, "An unexpected error occured");
+        }
+    }
 
     async createUser(req: Request, res: Response) {
         try {
-            console.log("Request for creating one user received");
+            console.log("Request for creating one post received");
             const validation = CustomResponse.validate(req);
             if (validation.length > 0) {
                 return CustomResponse.send(
@@ -67,18 +62,16 @@ class postController {
 
             const { title, content, user_id } = req.body;
 
-            const result = await prisma.post.create({
-                data: {
-                    title,
-                    content,
-                    user_id,
-                },
-            });
+            const result = await PostService.add(title, content, user_id);
 
-            return CustomResponse.send(res, HTTP_STATUS.OK, "Successfully created post!", result);
+            if (!result) {
+                return CustomResponse.send(res, HTTP_STATUS.OK, "Failed to create post", result);
+            }
+
+            return CustomResponse.send(res, HTTP_STATUS.OK, "Successfully created post", result);
         } catch (error) {
             console.log(error);
-            return CustomResponse.send(res, HTTP_STATUS.UNPROCESSABLE_ENTITY, "An unexpected error occured");
+            return CustomResponse.send(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, "An unexpected error occured");
         }
     }
 

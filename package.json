@@ -1,35 +1,39 @@
 {
-  "name": "mern-superstore",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "ts-node ./src/app.ts",
-    "dev": "nodemon app.ts",
-    "build": "tsc --project tsconfig.json && cp -r ./server ./dist/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Snigdho Dip Howlader",
-  "license": "ISC",
-  "dependencies": {
-    "@prisma/client": "^5.18.0",
-    "body-parser": "^1.20.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "express-validator": "^7.1.0",
-    "mongoose": "^8.5.2",
-    "multer": "^1.4.5-lts.1",
-    "tsconfig-paths": "^4.2.0"
-  },
-  "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "@types/multer": "^1.4.11",
-    "@types/node": "^22.1.0",
-    "nodemon": "^3.1.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
-  }
+    "name": "mern-superstore",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "ts-node ./src/app.ts",
+        "dev": "nodemon app.ts",
+        "build": "tsc --project tsconfig.json && cp -r ./server ./dist/server",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "npx eslint ."
+    },
+    "author": "Snigdho Dip Howlader",
+    "license": "ISC",
+    "dependencies": {
+        "@prisma/client": "^5.18.0",
+        "@eslint/js": "^9.6.0",
+        "@types/eslint__js": "^8.42.3",
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "express-validator": "^7.1.0",
+        "mongoose": "^8.5.2",
+        "multer": "^1.4.5-lts.1",
+        "tsconfig-paths": "^4.2.0"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "^2.4.6",
+        "@types/cors": "^2.8.17",
+        "@types/express": "^4.17.21",
+        "@types/multer": "^1.4.11",
+        "@types/node": "^22.1.0",
+        "nodemon": "^3.1.4",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^7.15.0"
+    }
 }

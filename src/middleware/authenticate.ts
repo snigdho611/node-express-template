@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-// import { failure } from "../util/commonResponse";
 import { HTTP_STATUS } from "../util/httpStatus";
 import CustomResponse from "@util/commonResponse";
 
