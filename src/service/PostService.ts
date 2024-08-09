@@ -2,10 +2,6 @@ import { PostModel } from "src/model/Post";
 
 class postService {
     async getAll(page?: number, limit?: number) {
-        // const result = await prisma.post.findMany({
-        //     skip: page ? (page - 1) * (limit ? limit : 8) : 0,
-        //     take: limit ? limit : 8,
-        // });
         const result = await PostModel.find({})
             .skip(page ? (page - 1) * (limit ? limit : 8) : 0)
             .limit(limit ? limit : 8);
