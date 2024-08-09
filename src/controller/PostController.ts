@@ -37,7 +37,7 @@ class postController {
                 );
             }
             const { id } = req.params;
-            const post = await PostService.getById(Number(id));
+            const post = await PostService.getById(id);
 
             if (!post) {
                 return CustomResponse.send(res, HTTP_STATUS.NOT_FOUND, "Unable to find post");

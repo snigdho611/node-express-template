@@ -10,10 +10,10 @@ class postService {
         return result;
     }
 
-    async getById(id: number) {
+    async getById(id: string) {
         const post = await prisma.post.findFirst({
             where: {
-                id: Number(id),
+                id: id,
             },
         });
 
