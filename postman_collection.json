@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "a19f720a-94a8-49ea-b658-94139c47a85d",
+		"name": "To Do List",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14481775"
+	},
+	"item": [
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"123\",\n    \"content\": \"This is some content as well, again\",\n    \"user_id\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURLbackend}}/posts/create",
+					"host": [
+						"{{baseURLbackend}}"
+					],
+					"path": [
+						"posts",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURLbackend}}/posts/all?page=1&limit=5",
+					"host": [
+						"{{baseURLbackend}}"
+					],
+					"path": [
+						"posts",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURLbackend}}/posts/detail/1",
+					"host": [
+						"{{baseURLbackend}}"
+					],
+					"path": [
+						"posts",
+						"detail",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "my-file",
+							"type": "file",
+							"src": "/home/bjit/Pictures/Screenshot from 2024-08-01 09-09-03.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURLbackend}}/posts/file",
+					"host": [
+						"{{baseURLbackend}}"
+					],
+					"path": [
+						"posts",
+						"file"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
