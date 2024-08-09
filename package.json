@@ -16,7 +16,6 @@
     "author": "Snigdho Dip Howlader",
     "license": "ISC",
     "dependencies": {
-        "@prisma/client": "^5.18.0",
         "@eslint/js": "^9.6.0",
         "@types/eslint__js": "^8.42.3",
         "body-parser": "^1.20.2",
