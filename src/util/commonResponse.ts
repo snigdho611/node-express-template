@@ -1,4 +1,3 @@
-import { HTTP_STATUS } from "../util/httpStatus";
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 
