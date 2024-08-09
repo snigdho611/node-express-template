@@ -132,6 +132,12 @@ git checkout postgres
 npm install
 ```
 
+<li>In the .env file, You will need to set the connection string for your database. This is the connection string for postgresql running on localhost, and the database is named to_do_list:</li>
+
+```env
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/to_do_list
+```
+
 <li>Generate the prisma client:</li>
 
 ```bash
@@ -144,16 +150,10 @@ npx prisma generate
 npx prisma migrate dev
 ```
 
-<li>Navigate to the .env file. If you want a port of your choice to run the project on, set it up inside a .env file. This is the env value for port if you want to run it on port 8000:</li>
+<li>In the .env file. If you want a port of your choice to run the project on, set it up inside a .env file. This is the env value for port if you want to run it on port 8000:</li>
 
 ```env
 PORT=8000
-```
-
-<li>Still at the .env file, You will need to set the connection string for your database. This is the connection string for postgresql running on localhost, and the database is named to_do_list:</li>
-
-```env
-DATABASE_URL=postgres://postgres:postgres@localhost:5432/to_do_list
 ```
 
 <li>Run the project in dev using:</li>
