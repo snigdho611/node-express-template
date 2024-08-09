@@ -132,10 +132,10 @@ git checkout postgres
 npm install
 ```
 
-<li>In the .env file, You will need to set the connection string for your database. This is the connection string for postgresql running on localhost, and the database is named to_do_list:</li>
+<li>In the .env file, You will need to set the connection string for your database. This is the connection string for a postgresql database running on localhost, and the database is named to_do_list. Please take note of the username and password as it will be different for each user:</li>
 
 ```env
-DATABASE_URL=postgres://postgres:postgres@localhost:5432/to_do_list
+DATABASE_URL=postgres://[username]:[password]@localhost:5432/to_do_list
 ```
 
 <li>Generate the prisma client:</li>
