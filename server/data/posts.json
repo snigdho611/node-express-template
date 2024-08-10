@@ -1,18 +1,15 @@
 [
     {
-        "id": 1,
         "title": "This is a post",
         "content": "This is some content",
         "user_id": 2
     },
     {
-        "id": 2,
         "title": "This is another post",
         "content": "This is some content, again",
         "user_id": 2
     },
     {
-        "id": 3,
         "title": "Once again, this is a post",
         "content": "This is some content, once again",
         "user_id": 1
