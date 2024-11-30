@@ -25,14 +25,7 @@ class _Response_ {
 
     validate(req: Request) {
         const validation = validationResult(req).array();
-        // if (validation.length > 0) {
         return validation;
-        // .map((element) => ({
-        //     param: element.type,
-        //     message: element.msg,
-        // }));
-        // }
-        // return null;
     }
 }
 
