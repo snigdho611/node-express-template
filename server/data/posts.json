@@ -1,18 +1,27 @@
 [
     {
+<<<<<<< HEAD
         "_id": "66b57f5a109363b55bf5913a",
+=======
+>>>>>>> postgres
         "title": "This is a post",
         "content": "This is some content",
         "user_id": 2
     },
     {
+<<<<<<< HEAD
         "_id": "66b57f65bf57c0c118afd152",
+=======
+>>>>>>> postgres
         "title": "This is another post",
         "content": "This is some content, again",
         "user_id": 2
     },
     {
+<<<<<<< HEAD
         "_id": "66b57f70a2d9979a498b388e",
+=======
+>>>>>>> postgres
         "title": "Once again, this is a post",
         "content": "This is some content, once again",
         "user_id": 1
