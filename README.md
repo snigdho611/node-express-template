@@ -10,12 +10,9 @@ The project is fully set up with <a href="">Express JS</a> & <a href="https://ww
 <p>Packages that are required to run this include:</p>
 <ol>
     <li>
-<<<<<<< HEAD
-=======
         <a href="https://www.npmjs.com/package/@prisma/client">@prisma/client</a>
     </li>
     <li>
->>>>>>> postgres
         <a href="https://www.npmjs.com/package/cors">cors</a>
     </li>
     <li>
@@ -37,11 +34,7 @@ The project is fully set up with <a href="">Express JS</a> & <a href="https://ww
 <span>Following are dev packages:</span>
 <ol>
     <li>
-<<<<<<< HEAD
-        <a href="https://www.npmjs.com/package/@eslint/js">"@eslint/js"</a>
-=======
         <a href="https://www.npmjs.com/package/@eslint/js">@eslint/js</a>
->>>>>>> postgres
     </li>
     <li>
         <a href="https://www.npmjs.com/package/@types/eslint__js">@types/eslint__js</a>
@@ -126,19 +119,11 @@ git clone git@github.com:snigdho611/node-template.git
 cd node-template
 ```
 
-<<<<<<< HEAD
 <li>Switch to the correct branch. The branch for the mongoose setup is called `mongoose`:</li>
 , and the command will be:
 
 ```bash
 git checkout mongoose
-=======
-<li>Switch to the correct branch. The branch for the postgres setup is called `postgres`:</li>
-, and the command will be:
-
-```bash
-git checkout postgres
->>>>>>> postgres
 ```
 
 <li>Install the necessary packages:</li>
@@ -147,7 +132,6 @@ git checkout postgres
 npm install
 ```
 
-<<<<<<< HEAD
 <li>Navigate to the .env file. If you want a port of your choice to run the project on, set it up inside a .env file. This is the env value for port if you want to run it on port 8000:</li>
 
 ```env
@@ -158,30 +142,6 @@ PORT=8000
 
 ```env
 DATABASE_URL=mongodb://127.0.0.1:27017/to_do_list
-=======
-<li>In the .env file, You will need to set the connection string for your database. This is the connection string for a postgresql database running on localhost, and the database is named to_do_list. Please take note of the username and password as it will be different for each user:</li>
-
-```env
-DATABASE_URL=postgres://[username]:[password]@localhost:5432/to_do_list
-```
-
-<li>Generate the prisma client:</li>
-
-```bash
-npx prisma generate
-```
-
-<li>Run the migration with this command:</li>
-
-```bash
-npx prisma migrate dev
-```
-
-<li>In the .env file. If you want a port of your choice to run the project on, set it up inside a .env file. This is the env value for port if you want to run it on port 8000:</li>
-
-```env
-PORT=8000
->>>>>>> postgres
 ```
 
 <li>Run the project in dev using:</li>
