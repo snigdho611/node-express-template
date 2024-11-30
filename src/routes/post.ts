@@ -1,7 +1,7 @@
 import express from "express";
-import validator from "../middleware/validation";
+import validator from "@middleware/validation";
 const router = express.Router();
-import PostController from "../controller/PostController";
+import PostController from "@controller/PostController";
 import { isAdmin } from "@middleware/authenticate";
 
 router.get("/all", PostController.getAll);

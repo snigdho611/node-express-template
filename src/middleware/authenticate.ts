@@ -6,6 +6,7 @@ export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
     if (req.body.token) {
         next();
     } else {
-        return CustomResponse.send(res, HTTP_STATUS.FORBIDDEN, "Access is restricted");
+        CustomResponse.send(res, HTTP_STATUS.FORBIDDEN, "Access is restricted");
+        return;
     }
 };
