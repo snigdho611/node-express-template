@@ -1,4 +1,4 @@
-import { PostModel } from "src/model/Post";
+import PostModel from "src/model/Post";
 
 class postService {
     async getAll(page?: number, limit?: number) {
