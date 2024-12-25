@@ -5,10 +5,11 @@ import PostService from "@service/PostService";
 import path from "path";
 import fs from "fs";
 import { uploadImage } from "@middleware/files";
+import logger from "@config/logger";
 class postController {
     async getAll(req: Request, res: Response) {
         try {
-            console.log("Request for getting all posts received");
+            logger.info("Request for getting all posts received");
             const { page, limit } = req.query;
 
             if (Number(page) < 0 || Number(limit) < 0) {
@@ -21,7 +22,7 @@ class postController {
             CustomResponse.send(res, HTTP_STATUS.OK, "Successfully got all posts", result);
             return;
         } catch (error) {
-            console.log(error);
+            logger.error(error)
             CustomResponse.send(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, "An unexpected error occured");
             return;
         }
@@ -29,7 +30,7 @@ class postController {
 
     async getById(req: Request, res: Response) {
         try {
-            console.log("Request for getting one post received");
+            logger.info("Request for getting one post received");
             const validation = CustomResponse.validate(req);
             if (validation.length > 0) {
                 CustomResponse.send(res, HTTP_STATUS.UNPROCESSABLE_ENTITY, "An unexpected error occured", validation);
@@ -45,7 +46,7 @@ class postController {
             CustomResponse.send(res, HTTP_STATUS.ACCEPTED, "Successfully found post", post);
             return;
         } catch (error) {
-            console.log(error);
+            logger.error(error)
             CustomResponse.send(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, "An unexpected error occured");
             return;
         }
@@ -53,7 +54,7 @@ class postController {
 
     async createUser(req: Request, res: Response) {
         try {
-            console.log("Request for creating one post received");
+            logger.info("Request for creating one post received");
             const validation = CustomResponse.validate(req);
             if (validation.length > 0) {
                 CustomResponse.send(
@@ -77,7 +78,7 @@ class postController {
             CustomResponse.send(res, HTTP_STATUS.OK, "Successfully created post", result);
             return;
         } catch (error) {
-            console.log(error);
+            logger.error(error)
             CustomResponse.send(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, "An unexpected error occured");
             return;
         }
@@ -113,6 +114,7 @@ class postController {
                 );
             });
         } catch (error) {
+            logger.error(error)
             CustomResponse.send(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, "An unexpected error occured");
             return;
         }

@@ -19,7 +19,7 @@ export default [
                 },
             ],
             "no-undef": "error",
-            "no-console": "off",
+            "no-console": "warn",
             "@typescript-eslint/no-explicit-any": "error",
             "no-const-assign": "error",
             "@typescript-eslint/array-type": "error",
