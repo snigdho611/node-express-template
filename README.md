@@ -30,6 +30,9 @@ The project is fully set up with <a href="">Express JS</a> & <a href="https://ww
     <li>
         <a href="https://www.npmjs.com/package/multer">tsconfig-paths</a>
     </li>
+    <li>
+        <a href="https://www.npmjs.com/package/winston">winston</a>
+    </li>
 </ol>
 <span>Following are dev packages:</span>
 <ol>
@@ -58,13 +61,16 @@ The project is fully set up with <a href="">Express JS</a> & <a href="https://ww
         <a href="https://www.npmjs.com/package/nodemon">nodemon</a>
     </li>
     <li>
-        <a href="https://www.npmjs.com/package/ts-node">ts-node</a>
-    </li> 
-    <li>
         <a href="https://www.npmjs.com/package/typescript">typescript</a>
     </li>
     <li>
         <a href="https://www.npmjs.com/package/typescript-eslint">typescript-eslint</a>
+    </li>
+    <li>
+        <a href="https://www.npmjs.com/package/ts-node-dev">ts-node-dev</a>
+    </li>
+    <li>
+        <a href="https://www.npmjs.com/package/tsc-alias">tsc-alias</a>
     </li>
 </ol>
 <p><strong>Source folder architecture:</strong></p>
@@ -119,11 +125,11 @@ git clone git@github.com:snigdho611/node-template.git
 cd node-template
 ```
 
-<li>Switch to the correct branch. The branch for the mongoose setup is called `mongoose`:</li>
+<li>Switch to the correct branch. The branch for the mongoose setup is called `typescript-mongoose`:</li>
 , and the command will be:
 
 ```bash
-git checkout mongoose
+git checkout typescript-mongoose
 ```
 
 <li>Install the necessary packages:</li>
@@ -138,7 +144,7 @@ npm install
 PORT=8000
 ```
 
-<li>Still at the .env file, you will need to set the connection string for your database. This is the connection string for mongodb running on localhost, and the database is named to_do_list:</li>
+<li>You'll need to set the connection string for your database. This is the connection string for mongodb running on localhost, and the database is named node_express_template:</li>
 
 ```env
 DATABASE_URL=mongodb://127.0.0.1:27017/to_do_list
@@ -151,6 +157,8 @@ npm run dev
 ```
 
 </ol>
+
+<p>Update as of 25th December, 2024 includes logger with color coded logs</p>
 
 <p style="font-size: 13px">
 <u><b>Author:</b></u>
