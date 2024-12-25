@@ -125,11 +125,11 @@ git clone git@github.com:snigdho611/node-template.git
 cd node-template
 ```
 
-<li>Switch to the correct branch. The branch for the postgres setup is called `postgres`:</li>
+<li>Switch to the correct branch. The branch for the postgres setup is called `typescript-postgres`:</li>
 , and the command will be:
 
 ```bash
-git checkout postgres
+git checkout typescript-postgres
 ```
 
 <li>Install the necessary packages:</li>
