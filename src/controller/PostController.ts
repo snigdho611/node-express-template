@@ -82,7 +82,7 @@ class postController {
                 return;
             }
 
-            logger.info("Failed to create post")
+            logger.info("Successfully created post")
             CustomResponse.send(res, HTTP_STATUS.OK, "Successfully created post", result);
             return;
         } catch (error) {
