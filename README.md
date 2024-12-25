@@ -61,6 +61,9 @@ The project is fully set up with <a href="">Express JS</a> & <a href="https://ww
         <a href="https://www.npmjs.com/package/nodemon">nodemon</a>
     </li>
     <li>
+        <a href="https://www.npmjs.com/package/prisma">prisma</a>
+    </li>
+    <li>
         <a href="https://www.npmjs.com/package/typescript">typescript</a>
     </li>
     <li>
