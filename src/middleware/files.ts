@@ -4,11 +4,11 @@ const allowedImageTypes = ["image/jpeg", "image/png", "image/webp"];
 const fileUploader = multer({
     storage: diskStorage({
         destination: "storage/",
-        filename: (req, file, callback) => {
+        filename: (_, file, callback) => {
             callback(null, Date.now() + "-" + file.originalname);
         },
     }),
-    fileFilter(req, file, callback) {
+    fileFilter(_, file, callback) {
         const mimetype = file.mimetype;
 
         if (!allowedImageTypes.includes(mimetype)) {

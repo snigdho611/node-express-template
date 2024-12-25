@@ -9,7 +9,13 @@ export default [
     ...tseslint.configs.recommended,
     {
         rules: {
-            "no-unused-vars": "error",
+            "no-unused-vars": [
+                "warn",
+                {
+                    args: "all",
+                    argsIgnorePattern: "^_",
+                },
+            ],
             "@typescript-eslint/no-unused-vars": [
                 "error",
                 {
@@ -19,7 +25,7 @@ export default [
                 },
             ],
             "no-undef": "error",
-            "no-console": "off",
+            "no-console": "warn",
             "@typescript-eslint/no-explicit-any": "error",
             "no-const-assign": "error",
             "@typescript-eslint/array-type": "error",
