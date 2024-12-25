@@ -30,8 +30,11 @@ The project is fully set up with <a href="">Express JS</a> & <a href="https://ww
     <li>
         <a href="https://www.npmjs.com/package/multer">tsconfig-paths</a>
     </li>
+    <li>
+        <a href="https://www.npmjs.com/package/winston">winston</a>
+    </li>
 </ol>
-<span>Following are dev packages:</span>
+<span>The following are the development packages:</span>
 <ol>
     <li>
         <a href="https://www.npmjs.com/package/@eslint/js">@eslint/js</a>
@@ -58,13 +61,16 @@ The project is fully set up with <a href="">Express JS</a> & <a href="https://ww
         <a href="https://www.npmjs.com/package/nodemon">nodemon</a>
     </li>
     <li>
-        <a href="https://www.npmjs.com/package/ts-node">ts-node</a>
-    </li> 
-    <li>
         <a href="https://www.npmjs.com/package/typescript">typescript</a>
     </li>
     <li>
         <a href="https://www.npmjs.com/package/typescript-eslint">typescript-eslint</a>
+    </li>
+    <li>
+        <a href="https://www.npmjs.com/package/ts-node-dev">ts-node-dev</a>
+    </li>
+    <li>
+        <a href="https://www.npmjs.com/package/tsc-alias">tsc-alias</a>
     </li>
 </ol>
 <p><strong>Source folder architecture:</strong></p>
@@ -163,6 +169,8 @@ npm run dev
 ```
 
 </ol>
+
+<p>Update as of 25th December, 2024 includes logger with color coded logs</p>
 
 <p style="font-size: 13px">
 <u><b>Author:</b></u>

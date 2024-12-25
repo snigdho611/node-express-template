@@ -10,7 +10,8 @@ const logger = createLogger({
     ),
     defaultMeta: { service: "default" },
     transports: [
-        new transports.Console({
+        new transports.File({
+            filename: "logs/error.log",
             level: "error",
             format: combine(errors({ stack: true }), timestamp(), prettyPrint()),
         }),
